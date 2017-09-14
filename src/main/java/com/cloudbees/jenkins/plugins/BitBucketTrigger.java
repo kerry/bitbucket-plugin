@@ -62,11 +62,11 @@ public class BitBucketTrigger extends Trigger<Job<?, ?>> {
                         logger.println("Started on "+ DateFormat.getDateTimeInstance().format(new Date()));
                         boolean result = SCMTriggerItem.SCMTriggerItems.asSCMTriggerItem(job).poll(listener).hasChanges();
                         logger.println("Done. Took "+ Util.getTimeSpanString(System.currentTimeMillis()-start));
-                        if(result)
-                            logger.println("Changes found");
-                        else
-                            logger.println("No changes");
-                        return result;
+                        // if(result)
+                            // logger.println("Changes found");
+                        // else
+                            // logger.println("No changes");
+                        return true;
                     } catch (Error e) {
                         e.printStackTrace(listener.error("Failed to record SCM polling"));
                         LOGGER.log(Level.SEVERE,"Failed to record SCM polling",e);

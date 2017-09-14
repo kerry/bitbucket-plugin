@@ -24,6 +24,12 @@ public class BitbucketPayloadProcessor {
             if ("repo:push".equals(request.getHeader("x-event-key"))) {
                 LOGGER.log(Level.INFO, "Processing new Webhooks payload");
                 processWebhookPayload(payload);
+            } else if (
+                "pullrequest:fulfilled".equals(request.getHeader("x-event-key")) ||
+                "pullrequest:updated".equals(request.getHeader("x-event-key")) || 
+                "pullrequest:created".equals(request.getHeader("x-event-key"))) {
+                LOGGER.log(Level.INFO, "Processing new Webhooks payload for pull requests");
+                processWebhookPayload(payload);
             }
         } else {
             LOGGER.log(Level.INFO, "Processing old POST service payload");
